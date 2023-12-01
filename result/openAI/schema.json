@@ -1,0 +1,197 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Ordinal API",
+        "description": "This API allows you to get data from bitcoin mainnet ordinals protocol. To retrieve inscription ids, metadata and sat numbers.",
+        "version": "0.12.1"
+    },
+    "servers": [
+        {
+            "url": "https://ordinals.com"
+        }
+    ],
+    "paths": {
+        "/r/blockhash": {
+            "get": {
+                "description": "Retrieve the latest block height from a given network. ",
+                "operationId": "getLatestBlockHeight",
+                "parameters": [],
+                "deprecated": false
+            }
+        },
+        "/r/blocktime": {
+            "get": {
+                "description": "Retrieve the UNIX time stamp of latest block from a given network. ",
+                "operationId": "getLatestBlockTime",
+                "parameters": [],
+                "deprecated": false
+            }
+        },
+        "/r/blockhash/{blockHeight}": {
+            "get": {
+                "description": "Retrieve the block at given block height and network. In case required variables are missing, inform the user and use the following variable: {\"blockHeight\":\"1\"}",
+                "operationId": "getBlockHashFromBlockHeight",
+                "parameters": [
+                    {
+                        "name": "blockHeight",
+                        "in": "path",
+                        "required": true,
+                        "description": "Set Block Height. Allowed is only a positive number.'",
+                        "schema": {
+                            "type": "string",
+                            "pattern": "^[1-9]\\d*$"
+                        }
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/r/children/{inscriptionId}": {
+            "get": {
+                "description": "Retrieve the first 100 child inscriptions ids from a given inscription id and network. In case required variables are missing, inform the user and use the following variable: {\"inscriptionId\":\"fa9a67e27219837be1ec616470d7d1de0e822b245c233a5bf9699cd2abc01742i0\"}",
+                "operationId": "getLatestChildrensFromInscription",
+                "parameters": [
+                    {
+                        "name": "inscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Set Inscription ID. Allowed are only IDs following this format: exactly 64 hexadecimal characters followed by a lowercase \"i\" and a digit.'",
+                        "schema": {
+                            "type": "string",
+                            "pattern": "^[0-9a-f]{64}i\\d$"
+                        }
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/r/children/{inscriptionId}/<{pageNumber}>": {
+            "get": {
+                "description": "Retrieve a set of 100 child inscription ids from a given inscription id, page offset and network In case required variables are missing, inform the user and use the following variables: {\"inscriptionId\":\"fa9a67e27219837be1ec616470d7d1de0e822b245c233a5bf9699cd2abc01742i0\",\"pageNumber\":\"0\"}",
+                "operationId": "getChildrensFromInscriptionByPage",
+                "parameters": [
+                    {
+                        "name": "inscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Set Inscription ID. Allowed are only IDs following this format: exactly 64 hexadecimal characters followed by a lowercase \"i\" and a digit.'",
+                        "schema": {
+                            "type": "string",
+                            "pattern": "^[0-9a-f]{64}i\\d$"
+                        }
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "path",
+                        "required": true,
+                        "description": "Set Page Number of a result query. Allowed is only a positive number.'",
+                        "schema": {
+                            "type": "string",
+                            "pattern": "^[1-9]\\d*$"
+                        }
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/r/metadata/{inscriptionId}": {
+            "get": {
+                "description": "Retrieve JSON string containing the hex-encoded CBOR metadata from a given inscription id and network. In case required variables are missing, inform the user and use the following variable: {\"inscriptionId\":\"fa9a67e27219837be1ec616470d7d1de0e822b245c233a5bf9699cd2abc01742i0\"}",
+                "operationId": "getMetadataFromInscription",
+                "parameters": [
+                    {
+                        "name": "inscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Set Inscription Id. Allowed are only IDs following this format: exactly 64 hexadecimal characters followed by a lowercase \"i\" and a digit.'",
+                        "schema": {
+                            "type": "string",
+                            "pattern": "^[0-9a-f]{64}i\\d$"
+                        }
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/r/sat/{satNumber}": {
+            "get": {
+                "description": "Retrieve the first 100 inscription ids on a sat from a given sat number and network. In case required variables are missing, inform the user and use the following variable: {\"satNumber\":\"1942923750000000\"}",
+                "operationId": "getLatestInscriptionsFromSatNumber",
+                "parameters": [
+                    {
+                        "name": "satNumber",
+                        "in": "path",
+                        "required": true,
+                        "description": "Set Sat Number. Allowed is only a positive number.'",
+                        "schema": {
+                            "type": "string",
+                            "pattern": "^[1-9]\\d*$"
+                        }
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/r/sat/{satNumber}/{pageNumber}": {
+            "get": {
+                "description": "Retrieve a set of 100 inscription ids from a given sat number and network. In case required variables are missing, inform the user and use the following variables: {\"satNumber\":\"1942923750000000\",\"pageNumber\":\"0\"}",
+                "operationId": "getInscriptionsFromSatNumberByPage",
+                "parameters": [
+                    {
+                        "name": "satNumber",
+                        "in": "path",
+                        "required": true,
+                        "description": "Set Sat Number. Allowed is only a positive number.'",
+                        "schema": {
+                            "type": "string",
+                            "pattern": "^[1-9]\\d*$"
+                        }
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "path",
+                        "required": true,
+                        "description": "Set Page Number of a result query. Allowed is only a positive number.'",
+                        "schema": {
+                            "type": "string",
+                            "pattern": "^[1-9]\\d*$"
+                        }
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/r/sat/{satNumber}/at/{arrayIndex}": {
+            "get": {
+                "description": "Retrieve a inscriptionId from a given sat number, index of inscription and network. For example -1 would be the latest inscription id. In case required variables are missing, inform the user and use the following variables: {\"satNumber\":\"1942923750000000\",\"arrayIndex\":\"-1\"}",
+                "operationId": "getInscriptionFromSatNumberByIndex",
+                "parameters": [
+                    {
+                        "name": "satNumber",
+                        "in": "path",
+                        "required": true,
+                        "description": "Set Sat Number. Allowed is only a positive number.'",
+                        "schema": {
+                            "type": "string",
+                            "pattern": "^[1-9]\\d*$"
+                        }
+                    },
+                    {
+                        "name": "arrayIndex",
+                        "in": "path",
+                        "required": true,
+                        "description": "Set array array index. Allowed is only a positive or negative number.'",
+                        "schema": {
+                            "type": "string",
+                            "pattern": "^-?\\d+$"
+                        }
+                    }
+                ],
+                "deprecated": false
+            }
+        }
+    },
+    "comments": {
+        "schemas": {}
+    }
+}
