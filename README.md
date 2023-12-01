@@ -1,6 +1,3 @@
-[![CircleCI](https://img.shields.io/circleci/build/github/a6b8/repos2doc/main)](https://circleci.com/gh/a6b8/repos2doc)
-
-
 # Ord GPT
 
 ```
